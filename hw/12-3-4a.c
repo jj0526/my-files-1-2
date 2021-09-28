@@ -18,6 +18,24 @@ struct Date{
     int day;
     int year;
 };
+/**
+ * 
+ * struct Date recent(struct Date* first_date, struct Date* second_date)
+ * 
+ * Summary of the Recent function : 
+ * 
+ *      The Recent function return the the later date of any two dates passed to it.
+ * 
+ * Parameters : struct : containing integers
+ * 
+ * Return Value : struct -- Note : Modifies the struct "in place"
+ * 
+ * Description :
+ * 
+ *      This function utilizes comparing dates.
+ *      Note , the struct is modified in place.
+ * 
+*/
 
 struct Date recent(struct Date* first_date, struct Date* second_date){
     if ((first_date -> year) > (second_date -> year)){               // compares the year first

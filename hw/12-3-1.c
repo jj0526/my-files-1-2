@@ -20,7 +20,7 @@ struct Date{
     int year;
 }today;
 
-int Days(struct Date new_date);
+int Days(struct Date new_date);                         // forward declaration
 
 int main(){
     printf("What's the date today? MM DD YYYY (int integer)");

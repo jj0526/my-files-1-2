@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void cal(double average[], int size);
+void cal(double average[], int size);                      // forward declaration
 
 /**
   * File : 12-2-4a.c
@@ -25,4 +25,4 @@ struct car{
     int miles_driven;
     int gallons;
 }CARS[5];
-//variable name : CARS
+//variable name : CARS in array

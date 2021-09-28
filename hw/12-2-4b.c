@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void cal(double average[], int size);
+void cal(double average[], int size);                   // forward declaration
 
 /**
   * File : 12-2-4a.c
@@ -19,8 +19,6 @@ void cal(double average[], int size);
   *     and average miles per gallon achieved by the five cars. 
   *     Functions calculates average miles per gallon.
   * 
-
-
 */
 struct car{
     int car_number;
