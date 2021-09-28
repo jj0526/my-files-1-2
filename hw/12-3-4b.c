@@ -22,7 +22,7 @@ struct Date{
     int year;
 };
 
-struct Date recent(struct Date* first_date, struct Date* second_date);
+struct Date recent(struct Date* first_date, struct Date* second_date);              // forward declaration
 
 int main(){
     struct Date first, second;
@@ -44,7 +44,11 @@ int main(){
         printf("check the date again\n");
     }
 
-    printf("%d %d %d is the later date.\n", recent(&first, &second).month, recent(&first, &second).day, recent(&first, &second).year);
+    int res1 = recent(&first, &second).month;               // calls the function recent
+    int res2 = recent(&first, &second).day;                 // calls the function recent
+    int res3 = recent(&first, &second).year;                // calls the function recent
+
+    printf("%d %d %d is the later date.\n", res1, res2, res3);
 
     return 0;
 
