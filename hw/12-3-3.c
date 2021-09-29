@@ -21,10 +21,10 @@ struct Date{
  * 
 */
 
-int Days(struct Date* new_date);                    // forward declaration
+int Days(struct Date* new_date);                        // forward declaration
 
 int main(){
-    struct Date today;
+    struct Date today;                                  // declare a new struct "today"
     printf("What's the date today? MM DD YYYY (int integer)");
     while(1){
         scanf("%d %d %d", &today.month, &today.day, &today.year);
