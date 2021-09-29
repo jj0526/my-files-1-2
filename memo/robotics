@@ -1,3 +1,6 @@
 pinMode(2, OUTPUT);면 시작하자마자 main에 아무것도 안 넣어도 켜지는지
 왜 HIGH가 LOW처럼 되는지 - 
 5V에 왜 갑자기 꼽는지 
+
+A0~A5는 PinMode()로 setup()에서 정의 안 해도 됨. 하지만 지우진 않음
+

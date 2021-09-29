@@ -4,7 +4,7 @@ struct Date{
     int month;
     int day;
     int year;
-}today;
+};
 
 /**
  * File : 12-3-3.c
@@ -21,9 +21,10 @@ struct Date{
  * 
 */
 
-int Days(struct Date* new_date);
+int Days(struct Date* new_date);                    // forward declaration
 
 int main(){
+    struct Date today;
     printf("What's the date today? MM DD YYYY (int integer)");
     while(1){
         scanf("%d %d %d", &today.month, &today.day, &today.year);
@@ -59,9 +60,9 @@ int main(){
 */
 int Days(struct Date* new_date){
 
-    int passed_years = new_date->year - 2000;
-    int passed_months = new_date->month - 1;
-    int passed_days = new_date->day - 1;
+    int passed_years = new_date->year - 2000; // calculates the number of year from the year of 2000
+    int passed_months = new_date->month - 1;  // calculates the number of month from the month of 1 (January)
+    int passed_days = new_date->day - 1;      // calculates the number of the day from the day of 1 (1st)
 
     int how_many_days = 360 * passed_years + 30 * passed_months + passed_days; // calculates the number of days from the date 1/1/2000.
     
