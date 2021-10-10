@@ -1,0 +1,21 @@
+pinMode(13,OUTPUT);
+pinMode(12,INPUT);
+
+digitalWrite(13,HIGH);
+delay(1000);
+
+int value = digitalRead(12);
+
+for (int i = 0; i<256; i++){
+    analogWrite(3,i);
+    delay(10);
+}
+
+Serial.begin(9600);
+Serial.print(val);
+
+Serial.read() // i dont know about this
+int par = Serial.parseInt();
+
+analogRead(A0);
+val = map(val, 0, 1023, 0, 255);

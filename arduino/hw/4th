@@ -1,0 +1,106 @@
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(13,OUTPUT);
+  pinMode(2,INPUT);
+  Serial.begin(9600);
+}
+// 202135574 Jeon Sihyeon
+int count = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  count = count + 1;
+  Serial.print(count);
+  Serial.println(" sec");
+  delay(1000);
+}
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(13,OUTPUT);
+  pinMode(8, INPUT);
+}
+//202135574 Jeon Sihyeon
+int buttonState = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  buttonState = digitalRead(8);
+  if (buttonState == HIGH){
+      digitalWrite(13,HIGH);
+    }
+  else{
+      digitalWrite(13,LOW);
+    }
+}
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(8,INPUT);
+}
+//202135574 JeonSihyeon
+int buttonState = 0;
+int previousbuttonState = 0;
+int count = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  Serial.println(count);
+  previousbuttonState = buttonState;
+  buttonState = digitalRead(8);
+  count = count + 1;
+  if ((buttonState == LOW)&&(previousbuttonState==HIGH)){
+      count = 0;
+    }
+    delay(100);
+}
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(9,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+  pinMode(4, INPUT);
+}
+//202135574 Jeon Sihyeon
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+  if (digitalRead(2)==HIGH){
+      digitalWrite(9,HIGH);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+    }
+  if (digitalRead(3)==HIGH){
+      digitalWrite(10,HIGH);
+      digitalWrite(9,LOW);
+      digitalWrite(11,LOW);
+    }
+    
+  if (digitalRead(4)==HIGH){
+      digitalWrite(11,HIGH);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+    }
+}
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(9,OUTPUT);
+}
+//202135574 Jeon sihyeon
+int times = 0;
+void loop() {
+  times = Serial.parseInt();
+  // put your main code here, to run repeatedly:
+  for (int i = 0; i<times;i++){
+      digitalWrite(9,HIGH);
+      delay(50);
+      digitalWrite(9,LOW);
+      delay(50);
+    }
+}

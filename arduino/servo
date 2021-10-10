@@ -1,0 +1,9 @@
+#include <Servo.h>
+Servo myservo1;
+
+void setup(){
+    myservo1.attach(9);
+}
+void loop(){
+    myservo1.write(30);
+}

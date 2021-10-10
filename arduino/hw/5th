@@ -1,0 +1,89 @@
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+}
+//202135574 Jeon Sihyeon
+void loop() {
+  // put your main code here, to run repeatedly:
+  int val = analogRead(A0);
+  val = map(val,0,1023,0,255);
+  if (val>127){
+     digitalWrite(9,LOW);
+  }
+  else{
+     digitalWrite(9,HIGH);
+  }
+}
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+  pinMode(10,INPUT);
+}
+//202135574 Jeon Sihyeon
+void loop() {
+  // put your main code here, to run repeatedly:
+  int but = digitalRead(10);
+  if (but==LOW){
+    int light = analogRead(A1);
+    light = map(light,0,1023,0,255);
+    analogWrite(9,light);
+  }
+  else{
+     digitalWrite(9,LOW);
+    }
+}
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(13,OUTPUT);
+}
+//202135574 Jeon Sihyeon
+void loop() {
+  // put your main code here, to run repeatedly:
+  int val = analogRead(A0);
+  if (val>512){
+      digitalWrite(13,HIGH);
+    }
+   else{
+      digitalWrite(13,LOW);
+    }
+}
+
+
+void setup() {
+    // put your setup code here, to run once:
+    pinMode(9,OUTPUT);
+    pinMode(10,OUTPUT);
+    pinMode(11,OUTPUT);
+  }
+  //202135574 Jeon Sihyeon
+  void loop() {
+    // put your main code here, to run repeatedly:
+    int blue = analogRead(A0);
+    int red = analogRead(A1);
+    int green = analogRead(A2);
+    blue = map(blue,0,1023,0,255);
+    red = map(red,0,1023,0,255);
+    green = map(green,0,1023,0,255);
+    analogWrite(9, blue);
+    analogWrite(10, red);
+    analogWrite(11, green);
+}
+
+
+void setup() {
+    // put your setup code here, to run once:
+    Serial.begin(9600);
+  }
+  //202135574 Jeon Sihyeon
+  void loop() {
+    // put your main code here, to run repeatedly:
+    int a = analogRead(A0);
+    float temp = (5.0*a*100.0)/1024;
+    Serial.print(temp);
+}
