@@ -1,0 +1,46 @@
+
+1
+
+#include <Servo.h>
+Servo myservo1;
+void setup() {
+  // put your setup code here, to run once:
+  myservo1.attach(9);
+}
+int sec = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  for (sec = 0; sec<=180; sec++){
+    myservo1.write(sec);
+    delay(10);
+  }
+  for (sec = 180; sec>=0; sec--){
+    myservo1.write(sec);
+    delay(10);
+   }
+}
+
+
+2
+
+#include <Servo.h>
+Servo myservo1;
+void setup() {
+  // put your setup code here, to run once:
+  myservo1.attach(9);
+}
+//202135574 Jeon Sihyeon
+int times = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  times = analogRead(A0);
+  times = map(times, 0, 1023, 0, 180);
+  for (int val = 0; val<=times; val++){
+      myservo1.write(val);
+      delay(10);
+    }
+  for (int val = times; val>=0; val--){
+      myservo1.write(val);
+      delay(10);
+    }
+}

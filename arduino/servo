@@ -7,3 +7,14 @@ void setup(){
 void loop(){
     myservo1.write(30);
 }
+
+tone(9, 262, 500);
+delay(500);
+noTone(9);
+
+digitalWrite(outPin, HIGH);
+delayMicroseconds(50);
+digitalWrite(outPin, LOW);
+int duration = pulseIn(3, HIGH);
+Serial.print(duration);
+

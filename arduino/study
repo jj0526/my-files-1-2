@@ -17,5 +17,19 @@ Serial.print(val);
 Serial.read() // i dont know about this
 int par = Serial.parseInt();
 
-analogRead(A0);
+val = analogRead(A0);
+Serial.println(val);
+
+Serial.write(49); // send a byte “1” with the value 49
+
+
+Serial.available(49); // send a byte “1” with the value 49
+
+Serial.read(incomingByte);
+
 val = map(val, 0, 1023, 0, 255);
+
+print : literally write : changed into ascii
+
+int par=Serial.parseInt();
+Serial.println(par);

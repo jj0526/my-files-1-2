@@ -1,1 +1,7 @@
-A0와 ~13의 차이점
+ A0-A5 : analog
+
+
+ ~num twm
+    digital : 0 or 1
+
+forgot where to use Serial.println

@@ -1,0 +1,103 @@
+
+1
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(8,OUTPUT);
+}
+    int t[8] = {523, 587, 659, 698, 784, 880, 988};
+void loop() {
+  // put your main code here, to run repeatedly:
+  tone(8,t[4],500);
+  delay(500);
+  tone(8,t[4],500);
+  delay(500);
+  ...
+  tone(8,t[0],1500);
+  delay(1500);
+  noTone(8);
+  delay(1000);
+}
+
+
+2
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(2,INPUT);
+  pinMode(3,INPUT);
+  pinMode(4,INPUT);
+  pinMode(8,OUTPUT);
+}
+int t[4] = {0, 532, 587, 659};
+void loop() {
+  // put your main code here, to run repeatedly:
+    if (digitalRead(4) == HIGH){
+      tone(8,t[1]);   //do
+    }
+    else if (digitalRead(3) == HIGH){
+      tone(8,t[2]);  //re
+   
+    }
+    else if (digitalRead(2) == HIGH){
+      tone(8,t[3]);//mi
+    }
+    else{
+        noTone(8);
+    }
+}
+
+
+3
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(2,OUTPUT);
+  pinMode(3,INPUT);
+  pinMode(8,OUTPUT);
+}
+int t[4] = {523, 587, 659, 698};
+int Echo = 3;//input
+int Trig = 2;//output
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(Trig,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig,LOW);
+  
+  float dist = pulseIn(Echo, HIGH);
+  dist = dist/58.2; //cm
+    if (dist < 10){
+      tone(8, t[0]);
+    }
+    else if ((dist >= 10)&&(dist<20)){
+      tone(8, t[1]);
+    }
+    else if ((dist >= 20)&&(dist<30)){
+      tone(8, t[2]);
+    }
+    else if (dist >=30){
+      tone(8, t[3]);
+    }
+    else{
+        noTone(8);
+    }
+}
+
+
+4
+
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,5,4,3,2);
+
+void setup() {
+  // put your setup code here, to run once:
+  lcd.begin(16,2);
+  lcd.setCursor(0,0);
+  lcd.print("hello, world!");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
