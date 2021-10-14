@@ -1,3 +1,5 @@
+1.
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -15,6 +17,8 @@ void loop() {
   }
 }
 
+
+2.
 
 void setup() {
   // put your setup code here, to run once:
@@ -37,6 +41,8 @@ void loop() {
 }
 
 
+3.
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -55,14 +61,16 @@ void loop() {
 }
 
 
+4.
+
 void setup() {
     // put your setup code here, to run once:
     pinMode(9,OUTPUT);
     pinMode(10,OUTPUT);
     pinMode(11,OUTPUT);
-  }
+}
   //202135574 Jeon Sihyeon
-  void loop() {
+void loop() {
     // put your main code here, to run repeatedly:
     int blue = analogRead(A0);
     int red = analogRead(A1);
@@ -75,6 +83,8 @@ void setup() {
     analogWrite(11, green);
 }
 
+
+5.
 
 void setup() {
     // put your setup code here, to run once:

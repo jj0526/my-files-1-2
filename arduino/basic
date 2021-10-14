@@ -1,0 +1,98 @@
+ Voltage
+○ Difference of electric energy between two points
+○ Unit: volt (V)
+ Intensity (Electric Current)
+○ A flow of electric charge
+○ Unit: ampere (A)
+ Resistance
+○ Opposition to the passage of an electric current
+○ Unit: ohm (Ω)
+
+Breadboard
+○ Construction base for prototyping of electronics
+○ Makes it easy to use for creating temporary prototypes and experimenting with circuit designs
+
+FND(Flexible Numeric Display) - 7segment 
+○ Display device for displaying Arabic numerals using a LED / a LCD
+
+Arduino environment is embedded with the built-in serial monitor to 
+communicate with an Arduino board.
+
+Push button (Switch)
+○ The push button is a component that connects two points in a circuit when you press it.
+
+Photoresistor (Ambient Light Sensor)
+○ A photoresistor (or LDR, or photocell) is a light-controlled variable resistor, which we can 
+read into the Arduino board as an analog value between 0 and 1023.
+
+Temperature sensor [LM35]
+○ LM35 is an integrated circuit sensor that can be used to measure temperature with an 
+electrical output proportional to the temperature in Celsius.
+
+analogRead : 0-1023
+
+The brightness of the LED is set a number between 0 to 255
+
+
+Motor
+    1. Alternating Current (AC) Motors
+        - The most widely used motors in industrial and commercial applications
+        1. Stationary part: STATOR
+        2. Rotating part: ROTOR
+
+    2. Direct Current (DC) Motors
+        - Used in applications where precise speed control is required
+        ○ A rotating magnetic field produced by the windings
+        ○ Brushes control the direction and speed of the motor
+
+
+    3. Universal motors: operate on either AC or DC
+
+1. Advantages
+
+            AC motor                            DC motor
+ 1. Low startup power                       High startup power and torque
+ 2. High durability and loger life spans    Simpler installation and maintenance
+ 3. Controllable starting current levels    Fast response times to starting,
+    and acceleration                        stopping and accelerating
+
+2. Usage
+    Home appliances                         Machinery that demands constant power
+    Compressor                              power such as vaccums, elevators
+    Computer                                Eletric vehicles
+    Conveyor systems
+    Fans and air conditioners
+    Irrigation pumps
+
+4. Stepper motor
+    - Motor that moves on step at a time
+        - A digital version of an electric motor
+        - Each step is defines by a step angle
+        - Low speed but high torque(돌림힘)
+    - Usage
+        - Precise positioning with a motor
+        - Hard disk drvies, robotics, andtennas, and telescopes
+    - Architecture
+        - Stator : holds multiple windings/phases
+        - Rotor : Usually magnetize material
+
+Operating Principles
+○ Fleming’s left-hand rule
+○ The magnitude of the force varies directly
+with the strength of the magnetic field and 
+the amount of current flowing in the conductor
+
+Servo motor
+
+1. A servomotor is a rotary actuator or linear actuator that allows for precise control of angular 
+    or linear position, velocity and acceleration
+2. Servo motors have three wires: power, ground, and signal.
+    − red : 5V
+    − black or brown : GND
+    − yellow, orange or white : input
+
+supports only servos on only two pins : 9 and 10
+
+
+Buzzer - Piezo speaker
+1. A Piezo is nothing but an electronic device that can be used to play tones.
