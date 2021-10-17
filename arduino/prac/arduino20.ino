@@ -7,6 +7,13 @@ void setup(){
 float num;
 
 void loop(){
+    !
+    digitalWrite(Trig,HIGH);
+    delayMicroseconds(10);
+    digitalWrite(Trig,LOW);
+  
+    float dist = pulseIn(Echo, HIGH);
+    !
     num = (float)(analogRead(3))/58.2;
 
     if (num<10){

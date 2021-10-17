@@ -9,7 +9,6 @@ struct Date{
 int main(){
     struct Date Date1;
     int total;
-
     scanf("%d %d %d", &Date1.month, &Date1.day, &Date1.year);
 
     printf("%d", Days(&Date1));
