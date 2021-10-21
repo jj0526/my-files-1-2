@@ -10,6 +10,7 @@ int main(){
 
     return 0;
 }
+
 double pow(float num1, int num2){
 
     if (num2 == 0){
