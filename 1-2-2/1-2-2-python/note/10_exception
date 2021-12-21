@@ -1,0 +1,98 @@
+예외처리
+
+
+1. 오류
+
+    - 구문 오류 : 프로그램 실행 전에 발생하는 오류
+    - 런타임 오류/예외 : 프로그램실행 중에 발생하는 오류
+
+    user_input_a = input("정수 입력>")
+
+    if user_input_a.isdigit():
+        number_input_a = int(user_input_a)
+        print ...
+    else
+        print("정수를 입력하지 않았습니다")
+    
+
+2. try except
+    try : 예외가 발생할 가능성이 있는 코드
+    except : 예외가 발생했을 때 실행할 코드
+
+
+    with pass
+
+    list_input_a = ["52", "273", "32", "스파이", "103"]
+
+    list_number = []
+    for item in list_input_a:
+        try :
+            float(item)
+            list_number.append(item)
+        except:
+            pass
+    print("{} 내부에 있는 숫자는".format(list_input_a))     #['52', '273', '32', '스파이', '103']
+    print("{}입니다.".format(list_number))                  #['52', '273', '32', '103']
+
+
+3. try except else
+    try :
+        예외가 발생할 가능성이 있는 코드
+    except:
+        예외가 발생했을 때 실행할 코드
+    else:
+        예외가 발생하지 않았을 때 실행할 코드
+    
+
+    try:
+        number_input_a = int(input('정수 입력> '))
+    except:
+        print('정수를 입력하지 않았습니다')
+    else:
+        print('원의 반지름 : ', number_input_a)
+
+
+4. "finally"
+
+    try:
+        예외가 발생할 가능성이 있는 코드
+    except:
+        예외가 발생했을 때 실행할 코드
+    else:
+        예외가 발생하지 않았을 때 실행할 코드
+    finally:
+        무조건 실행할 코드
+    
+    try:
+        number_input_a = int(input('정수 입력> '))
+    except:
+        print('정수를 입력하지 않았습니다')
+    else:
+        print('원의 반지름 : ', number_input_a)
+    finally:
+        print('일단 프로그램이 어떻게든 끝났습니다')
+
+
+5. try, except, finally 구문의 조합
+
+    - try 구문은 except 구문 또는 finally 구문과 함께 사용해야 함 
+    - else 구문은 반드시 except 구문 뒤에 사용해야 함
+
+    try + except
+    try + except + else
+    try + except + finally
+    try + except + else + finally
+
+
+    numbers = [55, 73, 22, 256, 123, 73, 456]
+
+
+    print('{}는 {}위치에 있습니다.'.format(22, numbers.index(22)))
+
+    number = 1000
+    try:
+        print('{}는 {}위치에 있습니다'.format(number, numbers.index(number)))
+    except:
+        print('리스트 내부에 없는 값입니다')
+    finally:
+        print('정상적으로 종료되었습니다')

@@ -1,0 +1,300 @@
+
+1. Ultrasonic sensor
+    - same mesures `distance`
+        -Same mechanism with submarine
+            * measure time from reflected ultrasonic signal
+            * difficult to detect `soft` object
+        - distance "cm" mode
+    -check connection
+        - step#1 : connect ultrasonic sensor to input '4'
+        - step#2 : select `port view` -> port
+        - Try your palm to check various distances
+
+        #pragma config(Sensor, S4, ultra, sensorEV3_Ultrasonic)
+        
+        task main(){
+            while(SensorValue(ultra)>20){
+                motor[motorB] = 20;
+                motor[motorC] = 20;
+            }
+            motor[motorB] = 0;
+            motor[motorC] = 0;
+        }
+
+
+        #pragma config(Sensor, S4, ultra, sensorEV3_Ultrasonic)
+
+        task main(){
+            int value;
+            while(1){
+                value = SensorValue(ultra);
+                displayTextLine(0, "%d cm", value);
+
+                if(value>32){
+                    motor[motorB]=30;
+                    motor[motorC]=30;
+                }
+                else if(value<28){
+                    motor[motorB]=-30;
+                    motor[motorC]=-30;
+                }
+                else{
+                    motor[motorB]=0;
+                    motor[motorC]=0;
+                }
+            }
+        }
+
+
+2. Servo motor
+
+    - A mechanical device to control rotation
+        - Motor power can be set by values from -100 to 100
+        - Rotated angle can be measured accurately
+            * can be used for control rotation accurately - e.g. rotate 87`
+
+    - Manual rotation
+        - check whether a wheel is connected to Prot B 
+        - select view - motor degrees - port B 
+        - manually rotate the wheel and check the value
+
+    - Method#1 : read&write servo motor status
+
+        - nMotorEncoder[motorX]
+        - Setting the variable by any value initializes the variable by zero
+            ex) nMotorEncoder[motorB] = 50 -> actually initialized by 0
+        - Value of the variable automatically adjusted by rotation
+            * you can stop motor by checking this value as follows :
+            
+        task main(){
+            nMotorEncoder[motorB] = 0;
+            motor[motorB] = 30;
+
+            while(nMotorEncoder[motorB] <= 268)
+                displayTextLine(0, "%d", nMotorEncoder[motorB]);
+            motor[motorB] = 0;
+            wait1Msec(2000);
+        }
+
+    - Method #2 : setting target value instead of checking status
+        setMotorTarget(motorX, degree, nSpeed)
+        - Rotate Wheel connected with Port B by 268`
+        - you can check status by getMotorRunning(motorX)
+        
+        task main(){
+            resetMotorEncoder(motorB);
+            setMotorTarget(motorB, 268, 30);
+            while(getMotorRunning(motorB))
+                displayTextLine(0, "%d", nMotorEncoder[motorB]);
+            wait1Msec(2000);
+        }
+
+    - setMotorTarget is better because servo motor considers "acceleration"
+        - EV3 servo motor slows te motor rotation slightly when the rotated angle
+        approaches the target value.
+
+    - Actual distance d from rotating a wheel by θ degree
+
+        d = θ*2*pi*r /360 
+        ->
+        θ = 360 * d / (2*pi*r)
+
+        task main(){
+            int degree;
+            float distance = 15.0;
+            float radius = 2.8;
+
+            degree = (int)(360.0*distance/(2*3.14159*radius));
+            displayTextLine(0, "%d", degree);
+
+            resetMotorEncoder(motorB);
+            resetMotorEncoder(motorC);
+            setMotorTarget(motorB, degree, 30);
+            setMotorTarget(motorC, degree, 30);
+        }
+
+    - Swing turn - accurate rotation
+        - Turn by rotating one wheel while stopping other
+
+        θ = a*t/r
+
+        task main(){
+            int degree;
+            float angle = 90.0;
+            float radius = 2.8;
+            float axis = 12;
+
+            degree = (int)(axis/radius*angle);
+            displayTextLine(0, "%d", degree);
+
+            resetMotorEncoder(motorB);
+            setMotorTarget(motorB, degree, 30);
+
+            while(getMotorRunning(motorB)){}
+
+            wait1Msec(2000);
+        }
+
+
+
+    - Point turn - accurate rotation
+        - Turn by rotating one wheel positively while rotating the other negatively
+
+        θ = b*t/r  (b = a/2)
+
+    - Rotate left by 90`
+
+    task main(){
+        int degree;
+        float angle = 90.0;
+        float radius = 2.8;
+        float axis = 12.0/2.0;
+
+        degree = (int)(axis/radius*angle);
+        displayTextLine(0, "%d", degree);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB, degree, 10);
+        setMotorTarget(motorC, -degree, 10);
+
+        while(getMotorRunning(motorB)){}
+
+        wait1Msec(2000);
+    }
+
+
+    task main()
+    {
+        int degree;
+        float angle=90.0;
+        float axis=12.0/2.0;
+        float radius=2.8;
+
+        degree=(int)(axis/radius*angle);
+        displayTextLine(0,"%d",degree);
+
+        nMotorEncoder[motorB]=0;
+        nMotorEncoder[motorC]=0;
+        wait1Msec(500);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        while(getMotorRunning(motorB)){}//front
+        wait1Msec(1500);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);
+        wait1Msec(1000);//right
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(2000);//go front
+
+        angle=-88;
+        degree=(int)(axis/radius*angle);
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);//turn left
+        wait1Msec(1500);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(3000);//go front
+
+        angle=-90;
+        degree=(int)(axis/radius*angle);
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);//turn left
+        wait1Msec(1500);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(3500);//go front
+
+        angle=90;
+        degree=(int)(axis/radius*angle);
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);
+        wait1Msec(1500);//right
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(3000);//go front
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);
+        wait1Msec(1500);//right
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(2000);//go front
+
+        angle=-92;
+        degree=(int)(axis/radius*angle);
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        setMotorTarget(motorB,degree,25);
+        setMotorTarget(motorC,-degree,25);//turn left
+        wait1Msec(1500);
+
+        resetMotorEncoder(motorB);
+        resetMotorEncoder(motorC);
+        motor[motorB]=25;
+        motor[motorC]=25;
+        wait1Msec(2000);//go front
+    }
+
+
+
+
+
+task main()
+{
+    nMotorEncoder[ motorB ] = 0;
+    motor[ motorB ] = 30;
+
+    while ( nMotorEncoder[ motorB ] <= 268 ) 
+        displayTextLine( 0, "%d", nMotorEncoder[ motorB ] );
+    
+    motor[ motorB ] = 0;
+    wait1Msec( 2000 );
+}
+
+==
+
+task main()
+{
+    resetMotorEncoder( motorB );
+    setMotorTarget( motorB, 268, 30 );
+
+    while ( getMotorRunning( motorB ) )
+        displayTextLine( 0, "%d", nMotorEncoder[ motorB ] );
+    
+    wait1Msec( 2000 );
+}
+
+
+-  Method #2 is better because servo motor considers “acceleration”
+    - EV3 servo motor slows the motor rotation slightly when the rotated angle approaches the target value

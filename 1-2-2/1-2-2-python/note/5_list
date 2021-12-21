@@ -1,0 +1,194 @@
+List 메소드
+
+1. 종류
+    - range
+    - index
+    - append, insert
+    - slice
+    - del, clear, pop
+    - concatenation
+    - count
+    - repetition
+    - count
+    - repetition
+    - sort, reverse
+    - length
+    - menbership test
+
+2. 형태
+    - listname = [10, 20, 'john', 36.2, True, 'John']
+
+3. 
+    - append(), insert(), len()
+        name = ['john', 'rosa', 'maria']
+        name.append('danny')
+        name.insert(2, 'alex')  //index and name
+        name[1] = 'selly'
+        len(name)
+
+    - remove(), del, pop(), clear()
+        name.remove('alex')
+        del name[1]     // index
+        name.pop()
+        name.clear()
+
+4. slice
+
+    리스트이름[0:6:2]   # 시작 : 끝(이 숫자는 포함 안함) : 간격(증가, 감소)
+
+5. 음수 인덱싱
+    my_list= [-4, -3, -2, -1]
+
+6. 리스트 연산(+, *)
+    - 연결 : `+` 연산자를 사용하여 두 리스트를 병합
+    - 반복 : `*` 연산자를 사용하여 지정된 횟수 만큼 리스트 요소 반복
+        ex) goodPlace + city
+            city *3             when gooldPlace and city are list
+    fruits = ['사과', '바나나', '체리', '포도', '오렌지', '딸기', '멜론']
+    print(fruits[-3:], fruits[1::3])
+    result : ['오렌지', '딸기', '멜론'] ['바나나', '오렌지']
+    
+    a = [5,7,3]
+    b = [3, 9, 1]
+    c = a+b
+    c.sort()
+    print(c)
+
+    result : [1, 3, 3, 5, 7, 9]
+    
+7. index()
+    goodPlace = ['Rome', 'Paris', 'Hanoi']
+    goodPlace.index('Paris')
+
+    result : 1
+
+8. Membership test
+    goodPlace = ['Rome', 'Paris', 'Hanoi']
+    'Rome' in goodPlace
+    result : True
+    'New York' in goodPlace
+    result : False
+
+9. count()
+    : 리스트에 '해당 항목'이 몇 번 포함되어 있는지 반환
+    goodPlace = ['Rome', 'Paris', 'Hanoi', 'Rome']
+    goodPlace.count('Rome')
+    result : 2
+
+10. sort(), reverse()
+    sort() : 오름차순 정렬을 수행하느 연산
+    reverse() : 리스트 거꾸로 뒤집기
+
+    listname.sort()
+    listname.reverse()
+
+    bucketList = ['Seoul', 'Daejon', 'Daegu', 'Busan', 'jeju']
+    goodPlace = ['Rome', 'Paris', 'Hanoi']
+
+    print(bucketList[2:5])
+    print(bucketList + goodPlace)
+    print('Paris' in goodPlace)
+    print(goodPlace.count('Rome'))
+    goodPlace.sort()
+    print(goodPlace)
+
+11. for
+    bucketList = ['Busan', 'Jeju', 'Sokcho', 'Daejeon']
+    for i in bucketList:
+        print(i)
+
+12. split([separator], [max])       separator의 기본값은 공백   list -> list
+    quiz = 'python.program.good'
+    sp = quis.split('.')            #['python', 'program', 'good']
+    sp = quiz.split('.',1)          #['python', 'program.good']
+    sp = quiz.split('.',2)          #['python', 'program', 'good']
+    
+    quiz = 'python program good'
+    sp = quiz.split(' ')            #['python', 'program', 'good']
+
+    quiz = 'python/program/good'
+    sp = quiz.split('/')            #['python', 'program', 'good']
+
+13. split() : list
+
+    bucketList = ['부산,제주,속초,대전']
+    for i in bucketList:
+        sp2 = i.split(',')
+    print(sp2)              #['부산','제주','속초','대전']
+    
+    quiz = ['1.중국의 수도를 선택하세요./1)칭따오/2)상하이/3)베이징']
+
+    for i in quiz:
+        quizsplit = i.split('/')
+    
+    print(quizsplit[0])
+    print(quizsplit[1])
+    print(quizsplit[2])
+    print(quizsplit[3])
+
+13. join() : string, list    list -> string
+    sp = ['python', 'program', 'good']
+    sp2 = ['부산', '제주', '속초', '대전']
+    quiz = ','.join(sp)                     # python,program,good
+    bucketList = '/'.join(sp2)              # 부산/제주/속초/대전
+    print(':'.join('abcd'))                 # a:b:c:d
+    print('/'.join('abcd'))                 # a/b
+
+14. enumerate()
+    - enumerate() 연산은 순서가 있는 자료형(리스트, 튜플, 딕셔너리 등)을
+        입력 받아 인덱스와 요소를 반환
+    
+    for i, value in enumerate(시퀀스 자료형 이름, [sequence]):
+        print(i, value)
+    
+    bucketList = ['부산', '제주', '속초', '대전']
+    for i, value in enumerate(bucketList):
+        print(i, value)
+    
+    result:
+        0 부산
+        1 제주
+        2 속초
+        3 대전
+    
+    
+    bucketList = ['부산', '제주', '속초', '대전']
+    for i, value in enumerate(bucketList, 1):
+        print(i, value)
+    
+    result:
+        1 부산
+        2 제주
+        3 속초
+        4 대전
+    
+    test = [57, 99, 78, 85, 60]
+
+    for i,value in enumerate(test, 1):
+        print('번호{}. 학생의 점수는 {}점 입니다.'.format(i, value))
+    
+
+15. max(), min(), sum()
+
+    test = [57, 99, 78, 85, 60]
+    print(max(test))
+
+16. 구구단
+
+    for dan in range(2,10):
+        for i in range(1, 10):
+            print('{} x {} = {}'.format(dan, i, dan*i))
+        print()
+
+
+    for dan in range(2,10):
+        for i in range(1, 10):
+            print('{} x {} = {}'.format(dan, i, dan*i), end = '\t')
+        print()
+
+    ==
+
+    for i in range(1,10):
+        for dan in range(2,10):
+            print('{} x {} = {}'.format(dan,i,dan*i), end = '\t')
+        print()

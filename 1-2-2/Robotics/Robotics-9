@@ -1,0 +1,178 @@
+1. TEXT
+
+    - displayTextLine(line, "str") // 8 pixel high
+
+    - displayTextLine(0, "%s", "hello");
+
+    - displayBigTextLine(line, "str") // double height
+
+    - strcpy(destination, source);
+
+    task main(){
+        string str;
+        char temp[10];
+        
+        strcpy(temp, "abcdefg");
+        strcpy(str, temp);
+        displayBigTextLine(0, "%s", str);
+
+        wait1Msec(2000);
+    }
+
+    - Text output
+        178x128
+
+        vertical line index : 0(top) to 15 (bottom)
+
+    - eraseDisplay()
+        erase the complete LCD display
+
+    task main(){
+        string str;
+
+        displayTextLine(0, "%s %s", "Hello", "RobotC!");
+
+        for (int i = 1; i<=7; i++){
+            str+="*";
+            displayTextLine(i, "%s", str);
+        }
+        wait1Msec(3000);
+    }
+
+2. SOUND
+    - PlaySound(sound)
+
+    -internal sounds:
+        soundBeepBeep, soundLowBuzz, soundBlip, soundLowBuzzShort, soundDownwardTones,
+        soundShortBlip, soundException, soundUpwardTones, soundFastUpwardTones
+
+    - queue
+        RobotC firmware has a sound queue to store up to 10 sound items
+
+    - control functions
+        - ClearSounds()
+            - clear all existing and buffered sounds
+        - MuteSound() / UnmuteSound()   //: we didn`t stidy these
+
+    - PlayTone(frequency, durationIn10Msec)
+
+    - PlayImmediateTone(frequency, durationIn10Msec)
+        - Bypass sound queue - useful for checking sensor status
+
+    - bSoundActive
+        - to check whether sound is playing
+
+        while(bSoundActive){
+            ...
+        }
+    
+    - nVolume(0 to 4)
+        - to control volume
+        - Once set, it is not restored to default value when program exits
+    
+    - RobotC accepts external sound file called as .rsf file 
+    task main(){
+        playSoundFile("Bravo");
+        sleep(2000);
+    }
+
+    task main(){
+        playSound(soundBeepBeep);
+        sleep(2000);
+        playSound(soundException);
+        sleep(2000);
+    }
+
+
+    task main()
+    {
+    int frequency[7]={523, 587, 659, 699, 784, 880, 988};
+    int song[27]={4, 2, 2, 3, 1, 1, 0, 1, 2, 3, 4, 4, 4, 4, 2, 2, 2, 3, 1, 1, 0, 2, 4, 4, 2, 2, 2};
+
+    int i, t;
+
+    for(i=0;i<27;i++){
+        t=song[i];
+        playImmediateTone(frequency[t], 50);
+        if(i==2||i==5||i==12||i==19) sleep(800);
+        else sleep(400);
+    }
+
+
+    
+    task main()
+    {
+        int frequency[7]={523, 587, 659, 699, 784, 880, 988};
+        int time[24]={4,4,5,5,4,4,2,4,4,2,2,1,4,4,5,5,4,4,2,4,2,1,2,0};
+
+        int i,t;
+        for(i=0;i<24;i++)
+        {
+            t = time[i];
+            playImmediateTone(frequency[t],50);
+            if (i==6||i==11||i==23){
+                sleep(800);
+            }
+            else
+                sleep(400);
+
+        }
+
+
+    }
+
+
+
+3. LED control
+    color number    동작
+        0           ledOff
+        1           ledGreen
+        2           ledRed
+        3           ledOrange
+        4           ledGreenFlash
+        5           ledRedFlash
+        6           ledOrangeFlash
+        7           ledGreenPulse
+        8           ledRedpulse
+        9           ledOrangePulse
+    
+    task main(){
+        int col;
+        for (col = 0; col<10; col++){
+            setLEDcolor(col);
+            sleep(3000);
+            setLEDcolor(ledOff);
+            sleep(1000);
+        }
+        setLEDColor(ledOff);
+    }
+
+
+
+
+4. touch sensor
+    1 : pushed
+    0 : nothing
+
+    - getTouchValue(touchSensor)
+
+    #pragma config(Sensor, S1, touchSensor, sensorEV3_Touch)
+    
+    task main()
+    {
+        while ( getTouchValue( touchSensor ) == 0 ){
+
+   	        motor[motorB] = 50;
+   		    motor[motorC] = 50;
+
+   		    if(getTouchValue( touchSensor ) == 1){
+   			    motor[motorB] = -50;
+   			    motor[motorC] = -50;
+   			    wait1Msec( 2000 );
+            }
+   		}
+    }
+
+
+
+

@@ -1,0 +1,134 @@
+function
+
+1. 내장함수
+    - abs()
+    - max()
+    - pow(x, y)
+
+
+2. 외장함수
+    - 모듈이름.함수이름()
+
+    def func_add(x, y):
+        return x+y
+    def func_sub(x, y):
+        return x-y
+    
+    print("덧셈 함수 호출 결과 = ", func_add(10, 20))
+    print("뺄셈 함수 호출 결과 = ", func_sub(10, 20))
+
+3. 전역변수와 지역 변수
+
+4. examples
+    def func_circum(radius):
+        result = 2*3.14*radius
+        print("원의 둘레는 %5.2f 입니다." %result)
+
+    radius = int(input("원의 반지름을 입력하세요:"))
+    func_circum(radius)
+
+    def func_circum(radius):
+        result = 2*3.14*radius
+        return result
+    
+    radius = int(input("원의 반지름을 입력하세요 :"))
+    result = func_circum(radius)
+
+    print("원의 둘레는 {0:5.2f}입니다".format(result))
+
+
+5. 기본 매개변수
+    def default(country = '한국'):
+        print("나는 " + country + "에서 왔어요")
+    
+    default('브라질')
+    default()
+
+
+    def default_score(name, kor, eng, mat=50):
+        print('이름 :', name)
+        print('국어 :', kor)
+        print('영어 :', eng)
+        print('수학 :', mat)
+
+    default_score('홍길동', 85, 95)
+
+
+6. *args argument
+    
+    - *args는 함수 정의에서 `매개변수`로 사용됨
+    -> args는 arguments의 약어임
+
+    - 함수에 인수를 전달하기 위해 가변 인수를 사용함
+        -> 가변 인수란 전달되는 인수의 개수가 가별적이라는 것을 의미함
+        = *args는 함수에 전달되는 `인수의 개수`가 확실하지 않는 경우에 사용
+        -> 여러 개의 인수를 받은 경우, 함수 내부에서 튜플로 받은 것처럼 인식함
+
+7. **kwargs argument
+    - 함수 정의에서 `키워드 매개변수`로 사용됨
+        -> keyword arguments의 약어
+    - 매개 변수 kwargs는 딕셔너리 형태를 가짐
+        -> `key = value` 형태의 모든 입력 인수가 해당 딕셔너리에 저장됨
+    - **kwargs는 가변적으로 인수들을 처리할 수 있음
+        -> 함수 호출 시, 인수는 (키워드 = 특정 값) 형태를 취함
+        -> 그것은 딕셔너리 형태로 {`키워드` : `특정 값`} 형태로 함수 내부 전달됨
+    
+    def keyword(**kwargs):
+        print(kwargs)
+    
+    keyword(a=1)
+    keyword(name='foo', age=3, addr='seoul')
+
+
+8. Unpacking a list
+    - list를 언패킹(unpacking)하려면, 리스트명 앞에 '*'를 붙임
+        -> function(*listname)
+    
+    def unpacking(a, b, c):
+        print(a)
+        print(b)
+        print(c)
+    
+    mylist = [10, 20, 30]
+    unpacking(*mylist)
+
+    - dictionary를 언패킹하려면, 딕셔너리명 앞에 '**'를 붙임
+        -> function(**dictionaryname)
+    
+    def unpacking(name, age, address):
+        print('이름 :', name)
+        print('나이 :', age)
+        print('주소 :', address)
+    mydictionary = {'name':'kim', 'age':22, 'address':Seoul}
+    print(unpacking(**mydictionary))
+
+
+    def quotRemain(a,b):
+    return a//b, a%b 
+
+    x = int(input('x : '))
+    y = int(input('y : '))
+    quotient, remain = quotRemain(x, y)
+    print('몫 : {}, 나머지 : {}'.format(quotient, remain))
+
+
+9. 재귀(recursion)
+
+
+    def hello(count):
+        if (count==0):
+            return 
+        print('Hello, python!', count)
+        count-=1
+        hello(count)
+    
+    hello(5)
+
+    def factorial(n):
+        if n==1:
+            return 1
+        print('n = ', n)
+        return n*factorial(n-1)
+    
+    factorial(5)
+

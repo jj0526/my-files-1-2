@@ -1,0 +1,15 @@
+bucketList = ['서울', '대구', '부산', '서울']
+print(bucketList)
+bucketList.append('제주')
+print(bucketList)
+print(len(bucketList))
+
+bucketList.insert(1,'대전')
+print(bucketList)
+bucketList.remove('서울')
+print(bucketList)
+bucketList.pop()
+print(bucketList)
+bucketList.clear()
+print(bucketList)
+print(bucketList)

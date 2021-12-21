@@ -1,0 +1,116 @@
+1.Color sensor
+
+    - Sensor receives amout of light
+        Red LED for indirect light + photo transistor
+        Typical distance - 0.5cm ~ 1cm from ground
+        Sensor output is continuous from 0 to 100
+        Active mode - detection of reflected light (contrast)
+        Inactive mode - detection of ambient light (illuminance)
+        Color mode - detection of seven different colors (0 ~ 7)
+
+    - Check connection
+        - Step #1 – connect light sensor to input ‘2’
+        - Step #2 – Select ‘Port View’ -> Port 2 -> ‘Col - Reflect’ or ‘Col - Ambient’ or ‘Col-Color
+
+    - Test connection
+        - check values for `Reflected Light` and `Ambient light` and `color`
+
+        Reflected light         ambient light           value
+            black                   dark                0
+            dark gray               ^                   ^
+            gray                    v                   v 
+            white                   bright              100
+    
+    -estimate threshold
+        - typical value = (black + white) / 2
+        - it could be different for each light sensor
+            * you may use different threshold for each light sensor
+            Dark area    (threshold)    bright area
+
+
+
+exmaple code
+    //move forward until black line
+
+    #pragma config(Sensor, S3, reflectedValue, sensorEV3_Color, modeEV3Colr_Reflected)
+    #define LEFT_MOTOR motorB
+    #define RIGHT_MOTOR motorC
+    #define Threshold 30
+
+    task main()
+    {
+        int i = 1;
+        motor[motorB] = 1000;
+        motor[motorC] = 1000;
+        while(SensorValue(reflectedValue) > Threshold){
+            motor[motorB] = 50;
+            motor[motorC] = 50;
+            wait1Msec(50);
+            if (i==4){
+                motor[motorB] = 0;
+                motor[motorC] = 0;
+                playSound(soundBeepBeep);
+                playSound(soundBeepBeep);
+                playSound(soundBeepBeep);
+                playSound(soundBeepBeep);
+                break;
+            }
+            if(SensorValue(reflectedValue) <Threshold){
+                for (int j = 0; j<i; j++)
+                    playSound(soundBeepBeep);
+                i++;
+                motor[motorB] = 50;
+                motor[motorC] = 50;
+                wait1Msec(50);
+            }
+        }
+    }
+
+
+    // red -> forward   green -> backward   blue -> left turn   yellow -> right turn
+    #pragma config(Sensor, S4, colorValue, sensorEV3_Color, modeEV3Color_Color)
+    #define RED 5
+    #define BLUE 2
+    #define YELLOW 4
+    #define GREEN 3
+    #define LEFT_MOTOR motorC;
+    #define RIGHT_MOTOR motorB;
+
+    task main()
+    {
+        while(1){{
+            motor[motorB] = 30;
+            motor[motorC] = 30;
+            wait1Msec( 500 );
+
+            if(SensorValue(colorValue) == RED){
+                motor[motorB] = 50;
+                motor[motorC] = 50;
+                wait1Msec( 500 );
+            }
+
+            if(SensorValue(colorValue) == BLUE){
+                motor[motorB] = 65;
+                motor[motorC] = 0;
+                wait1Msec( 500 );
+                motor[motorB] = 50;
+                motor[motorC] = 50;
+                wait1Msec( 500 );
+            }
+
+            if(SensorValue(colorValue) == YELLOW){
+                motor[motorB] = 0;
+                motor[motorC] = 65;
+                wait1Msec( 500 );
+                motor[motorB] = 50;
+                motor[motorC] = 50;
+                wait1Msec( 500 );
+            }
+
+            if(SensorValue(colorValue) == GREEN){
+                motor[motorB] = -50;
+                motor[motorC] = -50;
+                wait1Msec( 500 );
+            }
+        }
+    }

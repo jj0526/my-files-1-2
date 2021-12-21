@@ -1,0 +1,176 @@
+Turtle and GUI
+
+
+1. Turtle 클래스 안의 몇가지 함수들
+
+
+    shape() : 거북이 모양을 'arrow', 'classic', 'turtle', 'circle'
+            중의 하나로 변경
+    pencolor() : 펜 색상('red', 'blue', ...)
+    pensize()   : 펜크기(두께)
+    forward(), backward()   : 앞으로 이동, 뒤로 이동
+    right(), left()     : 오른쪽으로 회전, 왼쪽으로 회전
+    circle()    : 원 그리기
+    penup(), pendown()  : 그리기 중지, 그리기 시작
+
+
+    goto(100, 100)  : x, y 위치로 이동, 가운데가 (0, 0)
+    fillcolor('red')    : 특정 색깔로 채우기 색 설정하기
+    begin_fill(), end_fill()    : 채우기 시작, 채우기 끝
+    speed(0)    : 그리기 속도 설정하기(0-10),0 애니메이션 없음 1 느림->10빠름
+
+    import turtle
+
+    t = turtle.Turtle()
+    n = int(turtle.textinput('다각형 그리기', '정수를 입력하시오:'))
+
+    for i in range(n):
+        t.forward(100)
+        t.left(360/n)
+    
+
+    - 원 그리기
+    import turtle
+
+    t = turtle.Turtle()
+    t.shape('turtle')
+
+    t.circle(100)
+    t.forward(100)
+    t.circle(100)
+    t.forward(100)
+    t.circle(100)
+
+    - 색깔 칠하기
+    import turtle
+
+    t = turtle.Turtle()
+    t.shape('turtle')
+
+    t.fillcolor('red')
+    t. begin_fill()
+    t.circle(100)
+    t.end_fill()
+
+    t.forward(100)
+    t.fillcolor('green')
+    t. begin_fill()
+    t.circle(100)
+    t.end_fill()
+
+    t.forward(100)
+
+    t.forward(100)
+    t.fillcolor('blue')
+    t. begin_fill()
+    t.circle(100)
+    t.end_fill()
+
+
+    - 원을 360도 회전하며 그리기
+
+    import turtle
+
+    t = turtle.Turtle()
+    t.shape('turtle')
+
+    t.speed(0)
+    t.pencolor('red')
+
+    for x in range(36):
+        t.circle(90)
+        t. right(10)
+
+    
+    - 신기한 원 그리기
+    import turtle
+
+    t = turtle.Turtle()
+    t.speed(0)
+    t.shape('turtle')
+    t.pencolor('blue')
+
+    radius = 100
+    rotate = 4
+
+    for x in range(100):
+        t.forward(6)
+        t.right(rotate)
+        t.circle(radius)
+        rotate*=1.02
+        radius *= 98
+
+
+
+2. GUI (Graphical user interface)
+    tkinter     : tk GUI toolkit
+
+    - import tkinter
+    - import tkinter as tk
+    - from tkinter import *
+
+-
+    from tkinter import *
+
+    window = Tk()
+    b1 = Button(window, text = '버튼1')
+    b1.pack()
+    
+    b2 = Button(window, text = '버튼2')
+    b2.pack()
+
+    window.mainloop()
+
+
+3. window.geometry()
+
+    from tkinter import *
+
+    window = Tk()
+    window.geometry('300x300')
+    window.title('연습')
+
+    b1 = Button(window, text = '버튼1')
+    b1.pack()
+    
+    b2 = Button(window, text = '버튼2')
+    b2.pack()
+
+    window.mainloop()
+
+
+4. Entry, Label
+
+    - label : 문자나 이미지를 표시할 수 있는 위젯
+
+    l1 = Label(window, text = '눌러주세요')
+
+    - Entry : 사용자로부터 문자를 입력 받을 수 있는 위젯,
+        label과 같이 문자 출력도 가능
+    
+    e1 = Entry(window)
+
+
+    from tkinter import *
+
+    window = Tk()
+
+    l1 = Label(window, text = 'Label')
+    l1.pack()
+
+    e1 = Entry(window)
+    e1.pack()
+
+    b1 = Button(window, text = 'Button')
+    b1.pack()
+
+    window.mainloop()
+
+
+5. pack()함수의 side
+    
+    b1 = Button(window, text='버튼1')
+    b1.pack(side=LEFT)
+
+    side = LEFT/RIGHT/TOP/BOTTOM
+    

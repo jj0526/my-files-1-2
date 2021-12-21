@@ -1,0 +1,167 @@
+객체와 모듈
+
+
+1. 객체
+    - 데이터 : 각 객체의 값이나 속성, 상태 등을 나타냄
+    - 기능 : 객체가 가지고 있는 데이터를 사용한 동장
+
+2. 클래스
+    - 클래스는 객체를 만들기 위한 틀(설계도)로 '관련 있는 변수와 함수의 묶음'
+    - 데이터와 동작을 한꺼번에 표현하는 문법적 요소
+        - 변수 : 데이터(값, 속성, 상태)를 저장
+        - 함수 : 동작(기능, 행동)을 표현
+        -> 이 클래스 안에 있는 변수와 함수를 멤버라고 하며 클래스 밖의 변수 및
+        함수와 구별하기 위해 '변수는 멤버 변수, 필드, 함수는 메소드 또는 멤버 함수'라고도 부름
+    
+3. 객체 만들고 사용
+
+    class Person:
+        def greeting1(self):
+            print('안녕하세요')
+        def greeting2(self):
+            print('또 뵙겠습니다')
+
+    p1 = Person()
+    p1.greeting1()
+
+
+    class Calc:
+        def add(self, a, b):
+            return a+b 
+        def sub(self, a, b):
+            return a-b 
+        def mul(self, a, b):
+            return a*b 
+        def div(self, a, b):
+            return a/b 
+    c1 = Calc()
+
+    num1 = int(input('첫 번째 정수를 입력하세요:'))
+    num2 = int(input('두 번째 정수를 입력하세요:'))
+
+    result1 = c1.add(num1, num2)
+    result2 = c1.sub(num1, num2)
+    result3 = c1.mul(num1, num2)
+    result4 = c1.div(num1, num2)
+
+    print('더한 결과는 %s입니다.' %result1)
+    ...
+
+
+    class Circle:
+        pi = 3.14
+        def circleA(self, radius):
+            return self.pi*radius*radius
+        def circleC(self, radius):
+            return 2*self.pi*radius
+    
+    c1 = Circle()
+
+    result1 = c1.circleA(7)
+    result2 = c1.circleC(7)
+
+    print('원주율 : ', c1.pi)
+    print('원의 면적 :', result1)
+    print('원의 둘레 :', result2)
+
+
+13. 인스턴스 변수 추가하기
+    
+    class Person:
+        def greeting1(self, n):
+            self.name = n 
+            print('%s님 안녕하세요' %self.name)
+        def greeting2(self):
+            print('%s님 또 뵙겠습니다' %self.name)
+    
+    p1 = Person()
+    p1.greeting1('홍길동')
+    p1.greeting2()
+
+
+    class Person:
+        def setNameAge(self, n, a):
+            self.name = n
+            self.age = a
+    
+    p1 = Person()
+
+    p1.setNameAge('홍길동', 20)
+    print('이름은 %s입니다.' %p1.name)
+    print('나이는 %s입니다.' %p1.age)
+
+
+    class Person:
+        def setNameAge(self, n, a):
+            self.name = n
+            self.age = a
+
+    p1 = Person()
+    p2 = Person()
+    p3 = Person()
+
+    p1.setNameAge('홍길동', 20)
+    p2.setNameAge('백설공주', 30)
+    p3.setNameAge('신데렐라', 40)
+
+    print('이름은 %s이고 나이는 %s입니다' %(p1.name, p1.age))
+    ...
+
+    ==
+14. __init__()
+
+    __init__으로 바꾸면 객체 만드는 순간 변수를 만들고 초기화 할 수 있음
+    class Person:
+        def __init__(self, n, a):
+            self.name = n
+            self.age = a 
+    
+    p1 = Person('홍길동', 20)
+    p2 = Person('백설공주', 30)
+    p3 = Person('신데렐라', 40)
+
+    print('이름은 %s이고 나이는 %s입니다' %(p1.name, p1.age))
+
+
+    class Person:
+        def __init__(self, name, age):
+            self.name = name 
+            self.age = age
+        def greeting(self):
+            print('내 이름은 %s이고 %s살이야' %(self.name, self.age))
+
+    p1 = Person(name = '신데렐라', age = 30)
+    p1.greeting()
+
+"15. 모듈 ★"
+
+    - 모듈은 함수와 변수, 클래스들을 모아 놓은 파일
+    #oper.py
+    def add(a,b):
+        return a+b
+
+    1. 일반적인 방법
+    import oper
+    print(oper.add(3,5))
+
+    2. 별명 사용
+    import oper as op
+    print(op.add(3,5))
+
+    3. 모듈 이름 생략, 모든 함수 사용
+    from oper import add   //또는 from oper import *
+    print(add(3,5))
+
+16. random
+
+    import random
+
+    random.random()             0.0~1.0
+    random.randint(1,6)
+    random.choice(['apple', 'pear', 'lemon'])
+
+    import random
+    food = ["짜장면", "짬뽕", "탕수육", "군만두"]
+    print(food)
+    random.shuffle(food)
+    print(food)

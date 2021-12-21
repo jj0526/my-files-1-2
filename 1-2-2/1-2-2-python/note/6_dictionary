@@ -1,0 +1,132 @@
+dictionary
+
+1. 종류
+    - get()
+    - len()
+    - update()
+    - keys()
+    - popitem()
+    - values()
+    - del
+    - items()
+    - clear()
+    - dict()
+    - membership test (in 키워드)
+    - zip()
+
+
+    key : value
+    mydict = {'name':'Kim', 'year':1999}
+
+
+    print(mydict['name'])       #'Kim'
+
+2. get() value 가져오기
+    dictionary.get(keyname, 'The name is not in the dictionary')
+
+    print(mydict['namw'])       #출력x
+    print(mydict['namw', 'The name is not in the dictionary'])   #'The name is not in the dictionary'
+
+
+3. update()
+    dictionary.update({key:value})
+
+    'key:value' 쌍이 없는 경우
+    마지막 위치에 추가
+
+    'key:value' 쌍이 있는 경우
+    동일한 key를 찾아 해당 value를 변경
+
+
+4. popitem(), del, clear()
+    mydict = {'name':'John', 'year':2000, 'hobby':'collection', 'score':98, 'color':blue}
+    mydict.popitem()            -> 맨 뒤의 항목을 제거
+    del mydict['year']          -> year 항목을 제거
+    mydict.clear()              -> 전체 항목을 모두 제거
+    mydict.pop('name')
+    del mydict                  -> mydict가 더이상 존재 안함 (자체를 없앰)
+
+
+5. membership teest, len()
+
+    dictionary = {'한국':'서울', '베트남':'하노이', '일본':'도쿄'}
+    print('한국' in dictionary)
+    >> True
+    print('중국' in dictionary)
+    >> False
+    print('서울' in dictionary)
+    >> False
+    print(len(dictionary))
+    >> 3
+
+
+6. keys(), values(), items()
+
+    keys() : 딕셔너리에 있는 모든 키를 '리스트' 형태로 반환함
+    values() : 딕셔너리에 있는 모든 value를 '리스트' 형태로 반환함
+    items() : 딕셔너리에 있는 모든 키-값 쌍을 '튜플'로 묶어 '리스트' 형태로 반환함
+
+    capitaldict = {'한국':'서울', '베트남':'하노이', '일본':'도쿄'}
+    capitaldict.keys()                  // ['한국', '베트남', '일본']
+    capitaldict.values()                // ['서울', '하노이', '도쿄']
+    capitaldict.items()                 //[('한국','서울'),('베트남', '하노이'), ('일본', '도쿄')]
+
+
+7. 딕셔너리에서 문장 사용하기
+
+    for x in capitaldict.keys():
+        print(x)
+    >>result:
+    한국
+    베트남
+    일본
+
+    for x in capitaldict.values():
+        print(x, end = ' ')
+    
+    result : 서울 하노이 도쿄
+
+    for x,y in capitaldict.items():
+        print(x, y)
+
+
+    capitaldict = {'한국':'서울', '베트남':'하노이', '일본':'도쿄'}
+
+    for x,y in capitaldict.items():
+        print('{}의 수도는 {}입니다'.format(x,y))
+    
+
+NOTE : 반복문 안에서 'key-value 쌍'은 삭제 불가
+    해당 값을 바꾸는건 가능
+-> x = {key:value for key,value in x.items() if value!=20}
+
+
+8. dict()
+    li = [('name', 'Alice'), ('year', 1999)]
+    info = dict(li)
+
+
+9. zip()
+    zip은 두 리스트의 요소를 쌍으로 묶는 딕셔너리를 생성함
+    
+    title = ['name', 'age', 'birthday']
+    value = ['Johnson', 20, '1998-04-15']
+
+    info = dict(zip(title,value))
+
+
+
+    name = []
+    score = []
+
+    while (True):
+        name.append(input('이름을 입력하시오 : '))
+        score.append(input('점수를 입력하시오 : '))
+        if (name[-1]==''or score[-1]==''):
+            name.pop()
+            score.pop()
+            break
+
+    info = dict(zip(name, score))
+
+    print(info)

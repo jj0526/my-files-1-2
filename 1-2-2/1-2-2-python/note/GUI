@@ -1,0 +1,223 @@
+GUI
+
+1. 격자(grid) 배치관리자, width
+
+
+    b1 = Button(window, text = '버튼1')
+    b1.grid(row=0, column=0)
+                        (0,0)  (0,1)  (0,2)
+                        (1,0)  (1,1)  (1,2)
+                        (2,0)  (2,1)  (2,2)
+    
+    - 계산기
+    from tkinter import *
+    
+    window = Tk()
+
+    b1 = Button(window, text = '1', width = 5)
+    b2 = Button(window, text = '2', width = 5)
+    b3 = Button(window, text = '3', width = 5)
+    b4 = Button(window, text = '+', width = 5)
+    b5 = Button(window, text = '=', width = 5)
+
+    b1.grid(row=0, column=0)
+    b2.grid(row=0, column=1)
+    b3.grid(row=0, column=2)
+    b4.grid(row=1, column=0)
+    b5.grid(row=1, column=1)
+
+    window.mainloop()
+
+
+    - Entry 이용해서
+    from tkinter import *
+    
+    window = Tk()
+
+    display = Entry(window, width=18, bg='yellow')  //bg='배경색', fg='글자색'
+    display.grid(row=0, column=0, columnspan=3)
+    //columnspan= 은 여러 개의 격자를 합침. 아니면 보기가 좋지 않다
+
+    b1 = Button(window, text = '1', width = 5)
+    b2 = Button(window, text = '2', width = 5)
+    b3 = Button(window, text = '3', width = 5)
+    b4 = Button(window, text = '+', width = 5)
+    b5 = Button(window, text = '=', width = 5)
+
+    b1.grid(row=1, column=0)
+    b2.grid(row=1, column=1)
+    b3.grid(row=1, column=2)
+    b4.grid(row=2, column=0)
+    b5.grid(row=3, column=1)
+
+    window.mainloop()
+
+
+2. place 배치관리자
+    b1.place(x=0, y=0)
+
+
+    from tkinter import *
+    window = Tk()
+    window.geometry('200x200')
+
+    b1=Button(window, text='0,0')
+    b1.place(x=0,y=0)
+    b2=Button(window, text='50,50')
+    b2.place(x=50,y=50)
+    b3=Button(window, text='70,65')
+    b3.place(x=70,y=65)
+
+3. 이벤트 처리하기
+
+    - 클릭으로
+    from tkinter import *
+
+    def p1():
+        print('안녕하세요')
+    
+    window = Tk()
+
+    b1 = Button(window, text='클릭하세요!', command=p1)
+    b1.pack()
+
+    window.mainloop
+
+
+    - led on off
+
+    from tkinter import *
+
+    def p1():
+        e1.insert(END, 'ON')    //e1.insert(0, 'ON')하면 앞에 삽입
+
+    def p2():
+        e1.insert(END, 'OFF')   //e1.insert(0, 'OFF')하면 앞에 삽입
+
+    window = Tk()
+    
+    b1 = Button(window, text='LED ON', width, command=p1)
+    b1.pack()
+    b1 = Button(window, text='LED OFF', width, command=p2)
+    b1.pack()
+    e1 = Entry(window)
+    e1.pack()
+
+    window.mainloop
+
+
+    from tkinter import *
+
+    def p1():
+        e1.delete(0, END)
+        e1.insert(END, 'ON') 
+
+    def p2():
+        e1.delete(0, END)
+        e1.insert(END, 'OFF') 
+
+    window = Tk()
+    
+    b1 = Button(window, text='LED ON', width=20, command=p1)
+    b1.pack()
+    b1 = Button(window, text='LED OFF', width=20, command=p2)
+    b1.pack()
+    e1 = Entry(window)
+    e1.pack()
+
+    window.mainloop
+
+
+- 예시 계산기
+
+    from tkinter import *
+
+    def p1():
+        a = int(e1.get())
+        b = int(e2.get())
+        e3.delete(0, END)
+        e3.insert(0, a+b)
+    
+    window = Tk()
+
+    l1 = Label(window, text='첫번째 정수', width=10)
+    l2 = Label(window, text='두번째 정수', width=10)
+    l3 = Label(window, text='더한 결과', width=10)
+    e1 = Entry(window); e2=Entry(window); e3=Entry(window)
+    l1.grid(row=0,column=0); e1.grid(row=0, column=1)
+    l2.grid(row=1,column=0); e2.grid(row=1, column=1)
+    l3.grid(row=2,column=0); e3.grid(row=2, column=1)
+
+    b1 = Button(window, text='더하기', command=p1, width=10)
+    b1.grid(row=3, column=0, columnspan=2)
+
+    window.mainloop()
+
+
+    - 간단한 계산기 작성2
+
+    from tkinter import *
+
+    def p1():
+        result = eval(e1.get())
+        e2.delete(0, END)
+        e2.insert(0, result)
+    
+    window = Tk()
+
+    l1 = Label(window, text='수식 입력', width=10)
+    l2 = Label(window, text='계산 결과', width=10)
+    e1 = Entry(window);
+    e2=Entry(window);
+    l1.grid(row=0,column=0); e1.grid(row=0, column=1)
+    l2.grid(row=1,column=0); e2.grid(row=1, column=1)
+
+    b1 = Button(window, text='계산', command=p1)
+    b1.grid(row=2, column=0, columnspan=2)
+
+    window.mainloop()
+
+
+    - clear 사용 가능
+    from tkinter import *
+
+    def p1():
+        if key == '=':
+            result = eval(display.get())
+            display.insert(END, '='+str(result))
+        elif key=='C'
+            display.delete(0, END)
+        else:
+            display.insert(END, key)
+    def c1():
+        p1('1')
+    def c2():
+        p1('2')
+    def c3():
+        p1('3')
+    def c4():
+        p1('+')
+    def c5():
+        p1('=')
+    def c6():
+        p1('C')
+    
+    window = Tk()
+    display = Entry(window, width = 18)
+    display.grid(row=0, column=0, columnspan=3)
+
+    b1 = Button(window, text='1', width=5, command=c1)
+    b2 = Button(window, text='2', width=5, command=c2)
+    b3 = Button(window, text='3', width=5, command=c3)
+    b4 = Button(window, text='+', width=5, command=c4)
+    b5 = Button(window, text='=', width=5, command=c5)
+    b6 = Button(window, text='C', width=5, command=c6)
+
+    b1.grid(row=1, column=0)
+    b2.grid(row=1, column=1)
+    b3.grid(row=1, column=2)
+    b4.grid(row=2, column=0)
+    b5.grid(row=2, column=1)
+    b6.grid(row=2, column=2)
+    
+    window.mainloop()
